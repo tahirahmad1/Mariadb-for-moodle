@@ -1,0 +1,68 @@
+version: '3.1'
+
+
+
+services:
+
+
+
+  db:
+
+    image: mariadb
+
+    restart: always
+
+    environment:
+
+      MARIADB_ROOT_PASSWORD: example
+
+      MARIADB_USER: moodle
+
+      MARIADB_PASSWORD: moodle
+
+      MARIADB_DATABASE: bitnamimoodle
+
+
+
+    networks: 
+
+      - moodle
+
+    volumes:
+
+      - mariadb-data:/var/lib/mariadb
+
+  adminer:
+
+    image: adminer
+
+    restart: always
+
+    ports:
+
+      - 8085:8080
+
+    networks: 
+
+      - moodle
+
+    volumes: 
+
+      - adminer-data:/var/lib/adminer
+
+networks: 
+
+  moodle:
+
+    external: true  
+
+volumes:
+
+  mariadb-data:
+
+    driver: local
+
+  adminer-data:
+
+    driver: local
+
